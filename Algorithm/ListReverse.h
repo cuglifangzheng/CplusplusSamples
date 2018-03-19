@@ -48,10 +48,43 @@ Node* InitList(int a[], int len)
 // 遍历方式逆转链表
 Node* ReverseByCircle(Node* head)
 {
+	if (head == NULL || head->next == NULL)
+	{
+		return head;
+	}
+
+	Node* pCur = head;
+	Node* pPrev = NULL;
+	while (pCur)
+	{
+		Node* pTmp = pCur;
+		pCur = pCur->next;
+		pTmp->next = pPrev;
+		pPrev = pTmp;
+	}
+	
+	return pPrev;
 	
 }
 
-Node* ReverseByRecuse(Node* haed)
+Node* ReverseByRecuse(Node* head)
 {
-
+	if (head == NULL)
+	{
+		return head;
+	}
+	Node* p = head;
+	Node* q = head->next;
+	if (q == NULL)
+	{
+		return head;
+	}
+	else
+	{
+		head = ReverseByRecuse(q);
+	}
+	q->next = p;
+	p->next = NULL;
+	
+	return head;
 }
